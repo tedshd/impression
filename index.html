@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>impression</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css">
+<link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset200802.css">
+<script src="./impression.js"></script>
+<style>
+li {
+    height: 2em;
+}
+#target {
+    background: red;
+}
+</style>
+</head>
+<body>
+<script>
+    var ul = document.createElement('ul');
+    for (var i = 0; i < 500; i++) {
+        var li = document.createElement('li');
+        li.innerHTML = 'item_' + i;
+        ul.appendChild(li);
+    }
+    document.body.appendChild(ul);
+</script>
+</body>
+<script>
+function debounce(fn, delay) {
+    var timer;
+    return function () {
+        var context = this;
+        var args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            fn.apply(context, args);
+        }, delay);
+    };
+}
+
+document.querySelectorAll('li')[100].setAttribute('id', 'target');
+
+var IMP = new impression();
+IMP.addImpression(document.querySelectorAll('li')[100]);
+// IMP.addImpression(document.querySelectorAll('li')[200]);
+// IMP.addImpression(document.querySelectorAll('li'));
+
+window.addEventListener('scroll', debounce(function() {
+    IMP.calcImpression(function (dom) {
+        console.log(dom);
+    });
+}, 300));
+</script>
+</html>
