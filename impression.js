@@ -35,6 +35,14 @@
         }
 
         function removeImpression(key) {
+            if (!key || typeof(key) !== 'string') {
+                console.error('removeImpression: key type error');
+                return;
+            }
+            if (impressionObj[key] === undefined) {
+                console.error('removeImpression: key undefined');
+                return;
+            }
             delete impressionObj[key];
         }
 
@@ -47,7 +55,9 @@
                 var pos = getPosition(impressionObj[n]);
                 if (pos['top'] >= 0 && window.document.documentElement.clientHeight >= pos['top'] &&
                     pos['left'] >= 0 && window.document.documentElement.clientWidth >= pos['left']) {
-                    doSomething(impressionObj[n]);
+                    if (doSomething) {
+                        doSomething(impressionObj[n]);
+                    }
                     delete impressionObj[n];
                 }
             }
