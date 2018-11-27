@@ -46,15 +46,17 @@
             delete impressionObj[key];
         }
 
-        function calcImpression(doSomething) {
+        function calcImpression(doSomething, width, height) {
             if (Object.keys && !Object.keys(impressionObj).length) {
                 console.info('impression: not impression dom');
                 return;
             }
+            var w = width || window.document.documentElement.clientWidth,
+                h = height || window.document.documentElement.clientHeight;
             for(var n in impressionObj) {
                 var pos = getPosition(impressionObj[n]);
-                if (pos['top'] >= 0 && window.document.documentElement.clientHeight >= pos['top'] &&
-                    pos['left'] >= 0 && window.document.documentElement.clientWidth >= pos['left']) {
+                if (pos['top'] >= 0 && h >= pos['top'] &&
+                    pos['left'] >= 0 && w >= pos['left']) {
                     if (doSomething) {
                         doSomething(impressionObj[n]);
                     }

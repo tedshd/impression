@@ -28,15 +28,17 @@ Remove impression dom object, but you must know which dom object match impressio
 |-|-|-|-|-|
 | key | String | required | impression obj key and it is `impression_` + number | `impression_0`, `impression_3` |
 
-* **calcImpression([doSomething])**
+* **calcImpression([doSomething], [width], [height])**
 
-Dom object in view callback
+Calculate Dom object in view & get callback
 
 You can use it do something like ga or log or transition
 
 ||type|required|description|example|
 |-|-|-|-|-|
 | doSomething | function([dom]) {} | option | callback function | `function(dom) {console.log(dom);}` |
+| width | Number | option | view width want to calculate, default is browser view width | 960 |
+| height | Number | option | view height want to calculate, default is browser view height | 480 |
 
 ||type|required|description|
 |-|-|-|-|
